@@ -24,6 +24,7 @@ class SuperScaffold extends StatefulWidget {
     this.onCollapsed,
     this.brightness,
     this.scrollController,
+    this.physics = const BouncingScrollPhysics(),
     this.transitionBetweenRoutes = true,
   }) : super(key: key) {
     measures = Measures(
@@ -90,6 +91,7 @@ class SuperScaffold extends StatefulWidget {
 
   final Function(bool)? onCollapsed;
   late final ScrollController? scrollController;
+  final ScrollPhysics? physics;
 
   @override
   State<SuperScaffold> createState() => _SuperScaffoldState();
@@ -196,7 +198,7 @@ class _SuperScaffoldState extends State<SuperScaffold> {
           children: [
             NestedScrollViewPlus(
               physics: SnapScrollPhysics(
-                parent: const BouncingScrollPhysics(),
+                parent: widget.physics ?? const BouncingScrollPhysics(),
                 snaps: [
                   if (widget.appBar.searchBar!.scrollBehavior ==
                       SearchBarScrollBehavior.floated)
